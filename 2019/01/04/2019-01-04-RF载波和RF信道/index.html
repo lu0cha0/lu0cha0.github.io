@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tech odds and ends">
 <meta property="og:description" content="频率范围（frequency range）NR SI（Rel-14）的目标是支持高达100 GHz的频率，但是NR WI（Rel-15）只定义了450 MHz – 6 GHz（即FR1）和24.25 GHz – 52.6 GHz（即FR2）两个频率范围，这主要是因为在5G部署的初期这两个频率范围的需求最高。其他频率范围的研究被推迟到了Rel-16。  2018年9月的3GPP RAN#81全会批准">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-07T07:02:03.023Z">
+<meta property="og:updated_time" content="2019-01-07T07:27:12.883Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RF载波和RF信道">
 <meta name="twitter:description" content="频率范围（frequency range）NR SI（Rel-14）的目标是支持高达100 GHz的频率，但是NR WI（Rel-15）只定义了450 MHz – 6 GHz（即FR1）和24.25 GHz – 52.6 GHz（即FR2）两个频率范围，这主要是因为在5G部署的初期这两个频率范围的需求最高。其他频率范围的研究被推迟到了Rel-16。  2018年9月的3GPP RAN#81全会批准">
@@ -298,7 +298,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-07T15:02:03+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-07T15:27:12+08:00">
                 2019-01-07
               </time>
             
@@ -500,16 +500,16 @@
 </tr>
 </tbody>
 </table>
-<p>实际的RF信道的可能位置落在信道栅格上。信道栅格是RF参考频率的一个子集，在每个NR频段（band）上分别定义。例如，在n8频段（上行880 MHz – 915 MHz，下行925 MHz – 960 MHz），上、下行的信道栅格都是100 kHz，即每20个NR-ARFCN定义一个信道栅格的位置。</p>
+<p>在每个NR频段（band）上，允许放置RF信道的频率位置称为信道栅格。信道栅格的集合是RF参考频率的一个子集，在每个频段上有不同的定义。例如，在n8频段（上行880 MHz – 915 MHz，下行925 MHz – 960 MHz），上、下行的信道栅格都是100 kHz，即每20个NR-ARFCN定义一个信道栅格的位置。</p>
 <p><mark>【TBD：RF channel如何映射到SCS-specific carrier】</mark></p>
 <h3 id="同步栅格（synchronization-raster）"><a href="#同步栅格（synchronization-raster）" class="headerlink" title="同步栅格（synchronization raster）"></a>同步栅格（synchronization raster）</h3><p>和LTE不同的是，NR并不要求将同步信号和PBCH（合起来称为SSB）固定放在RF信道的中心，而是允许SSB在RF信道上“滑动”。类似于信道栅格的定义，允许放置SSB的频率位置也是在0 – 100 GHz范围内统一定义的，称为同步栅格。这种将信道栅格和同步栅格解耦的设计的一个好处是允许定义粒度很小的信道栅格（意味着很灵活的RF信道放置）以及粒度较大的同步栅格（意味着UE只需要搜索较少的同步栅格位置，从而降低小区搜索的功耗）。</p>
-<p>每个同步栅格（$SS_{REF}$）对应一个用整数编号的GSCN。和信道栅格一样，同步栅格的粒度也随着频率的增加而变大。显然，GSCN必须是NR-ARFCN的一个子集，以便在RRC信令中通过NR-ARFCN指定SSB的绝对频率位置（比如在配置SCell的时候）。</p>
-<p>值得指出的是GSCN在0 – 3 GHz频率范围内并不是等间隔定义的，而是每1.2 MHz的频率块内定义3个相互之间间隔100 kHz的GSCN。GSCN在其他频率范围则是等间隔定义的。</p>
+<p>每个同步栅格（$SS_{REF}$）对应一个用整数编号的GSCN。“在某个GSCN上放置一个SSB”意味着将该SSB的20个RB中第11个RB的第1个子载波的中心频率（$n_{RB}=10$，$k=0$）设置为该GSCN所对应的频率。</p>
+<p>和信道栅格一样，同步栅格的粒度也随着频率的增加而变大，见下表。显然，GSCN必须是NR-ARFCN的一个子集，以便在RRC信令中通过NR-ARFCN指定SSB的绝对频率位置（比如在配置SCell的时候）。值得指出的是GSCN在0 – 3 GHz频率范围内并不是等间隔定义的，而是在每个1.2 MHz的频率块内定义3个相互之间间隔100 kHz的GSCN。GSCN在其他频率范围则是等间隔定义的。</p>
 <table>
 <thead>
 <tr>
 <th>频率范围 [GHz]</th>
-<th>两个GSCN之间的最小距离</th>
+<th>两个相邻GSCN之间的最小距离</th>
 </tr>
 </thead>
 <tbody>
@@ -527,7 +527,6 @@
 </tr>
 </tbody>
 </table>
-<p>GSCN对应SSB的20个RB中第11个RB的第1个子载波的中心频率（$n_{RB}=10$，$k=0$）。</p>
 
       
     </div>
